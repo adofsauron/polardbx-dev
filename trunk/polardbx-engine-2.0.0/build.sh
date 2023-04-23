@@ -140,7 +140,7 @@ then
 fi
 
 build_type="debug"
-dest_dir="/u01/mysql"
+dest_dir="/data/u01/mysql"
 server_suffix="rds-dev"
 san_type=""
 asan=0
@@ -214,8 +214,8 @@ if [ x"$mach_type" = x"aarch64" ]; then # ARM64
     CC=gcc
     CXX=g++
 else # X86
-    CC=/opt/rh/devtoolset-7/root/usr/bin/gcc
-    CXX=/opt/rh/devtoolset-7/root/usr/bin/g++
+    CC=/usr/bin/gcc
+    CXX=/usr/bin/g++
 fi
 
 # Update choosed version
@@ -251,7 +251,7 @@ cmake .                               \
     -DMYSQL_MAINTAINER_MODE=0          \
     -DWITH_EMBEDDED_SERVER=0           \
     -DWITH_EXTRA_CHARSETS=all          \
-    -DWITH_SSL=openssl                 \
+    -DWITH_SSL=0                 \
     -DWITH_ZLIB=bundled                \
     -DWITH_ZSTD=bundled                \
     -DWITH_MYISAM_STORAGE_ENGINE=1     \
@@ -276,7 +276,8 @@ cmake .                               \
     -DDOWNLOAD_BOOST=1 \
     -DWITH_BOOST=extra/boost \
     -DMYSQL_SERVER_SUFFIX="$server_suffix"         \
-    -DWITHOUT_IS_UT=1
+    -DWITHOUT_IS_UT=1					\
+	-Wno-dev
 
 make -j `cat /proc/cpuinfo | grep processor| wc -l`
 
