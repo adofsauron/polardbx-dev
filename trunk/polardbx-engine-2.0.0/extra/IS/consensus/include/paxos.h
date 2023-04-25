@@ -25,7 +25,7 @@
 #include <cstdio>
 #include <iostream>
 #include <functional>
-#include <easy_log.h>
+//#include<easy_log.h>
 #include <ctime>
 #include <chrono>
 #include "consensus.h"
@@ -38,6 +38,7 @@
 #include "msg_compress.h"
 #include "paxos_error.h"
 #include "paxos_option.h"
+#include "easy_log.h"
 
 extern easy_log_level_t easy_log_level;
 #define PRINT_TIME() do {struct timeval tv;if (easy_log_level>=EASY_LOG_INFO) {gettimeofday(&tv, NULL);printf("TS:%ld.%06ld ",tv.tv_sec, tv.tv_usec);std::cout<<std::flush;}} while (0)
